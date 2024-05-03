@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# This script is displaying the minutes for the furst 12 hours
+
+hour=1
+while [ $hour -le 12 ]
+do
+	echo "Hour: $hour"
+	minutes=1
+        while [ $minutes -le 59 ]
+	do
+		echo $minutes
+		minutes=$(( minutes + 1 ))
+	done
+        hour=$(( hour + 1 ))
+done
+
