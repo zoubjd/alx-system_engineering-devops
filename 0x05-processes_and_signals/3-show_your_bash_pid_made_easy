@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#this file display the pid poss name that contain bash
+
+pgrep -flx ".*bash.*"
+
