@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#this file displays the bash precess
+# shellcheck disable=SC2009
+
+ps -e bash
+
