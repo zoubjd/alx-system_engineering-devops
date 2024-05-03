@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 #this code prints all the files in the dir
 
-for file in *; do
-    if [[ ! $file == .* && $file == *-* ]]
-    then
-        name_after_dash="${file}"
-        echo "$name_after_dash"
-    fi
+list=$(ls)
+for file in $list; do
+	echo "$file" | cut -d '-' -f2
 done
 
