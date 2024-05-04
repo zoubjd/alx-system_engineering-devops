@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#kills the same 4.. file
+
+pkill -f "7-highlander"
+
