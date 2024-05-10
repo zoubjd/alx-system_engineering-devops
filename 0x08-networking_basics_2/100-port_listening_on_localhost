@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#this file listens to a server on a port
+
+telnet localhost 98
