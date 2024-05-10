@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-"pings an IP adress passed as an argument"
+#pings an IP adress passed as an argument
 
 ip="${1}"
 if [ "$ip" ]
