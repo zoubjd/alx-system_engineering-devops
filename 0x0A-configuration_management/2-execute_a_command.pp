@@ -2,7 +2,5 @@
 
 exec { 'pkill_killmenow':
   command  => 'pkill killmenow',
-  provider => 'shell',
-  refreshonly => true,
 }
 
