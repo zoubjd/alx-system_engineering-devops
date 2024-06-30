@@ -1,3 +1,4 @@
+#!/usr/bin/pup
 # install flask from pip
 
 exec { 'flask':
