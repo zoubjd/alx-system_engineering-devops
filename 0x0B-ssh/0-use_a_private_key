@@ -1,1 +1,4 @@
+#!/usr/bin/env bash
+# connects to the server using ssh key
+
 ssh -i '~/.ssh/school' ubuntu@8.8.8.8
