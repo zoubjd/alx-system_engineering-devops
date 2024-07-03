@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Create custom 404 page
-ERROR_COPY="Ceci n'est pas une page - 404"
+ERROR_COPY="Ceci n'est pas une page"
 
 sudo apt-get -y update
 sudo apt-get -y install nginx
