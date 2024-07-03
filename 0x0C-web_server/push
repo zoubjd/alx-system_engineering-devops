@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+chmod u+x *
+git add .
+git commit -m 'push'
+git push
