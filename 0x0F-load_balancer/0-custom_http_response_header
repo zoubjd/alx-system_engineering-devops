@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-# Ignore SC2154 for shellcheck
-# shellcheck disable=SC2154
 
 # Update and install nginx
 sudo apt-get -y update
 sudo apt-get -y install nginx
 
-# Get the hostname
+# Extract the relevant part of the hostname (assuming the hostname is in the format 03-web-01, 03-web-02, etc.)
 HOSTNAME=$(hostname)
+CUSTOM_HEADER_VALUE=$(echo "$HOSTNAME" | sed -r 's/^03+-(web-[0-9]+)/\1/')
 
 # Add the custom header configuration
-sudo sed -i '/^\s*server_name.*/a \        add_header X-Served-By '"$HOSTNAME"';' /etc/nginx/sites-available/default
+sudo sed -i '/^\s*server_name.*/a \        add_header X-Served-By '"$CUSTOM_HEADER_VALUE"';' /etc/nginx/sites-available/default
 
 # Restart nginx to apply changes
 sudo systemctl restart nginx
+
