@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-# sets up the header name
+# adds a header
 
-proxy_set_header X-Served-By $host;
+add_header X-Served-By  $host;
