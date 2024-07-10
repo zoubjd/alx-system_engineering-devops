@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Function to check if haproxy is installed
+is_installed() {
+    dpkg -l | grep -qw "$1"
+}
+
+# Update package list
+sudo apt-get -y update
+
+# Check if haproxy is installed; if not, install it
+if ! is_installed "haproxy"; then
+    sudo apt-get install -y haproxy
+else
+    echo "haproxy is already installed."
+fi
+
+# Configure haproxy
+echo "
+    frontend cfg_front
+        bind *:80
+        mode http
+        default_backend cfg_back
+    backend cfg_back
+        balance roundrobin
+        server 529007-web-01 52.21.154.207:80 check
+        server 529007-web-02 100.27.5.248:80 check
+" | sudo tee /etc/haproxy/haproxy.cfg
+
+# Restart haproxy service
+sudo service haproxy restart
