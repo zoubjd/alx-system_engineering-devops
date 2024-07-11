@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # configures nginx to listen on 80
 
 # Update package lists and install nginx if not installed
