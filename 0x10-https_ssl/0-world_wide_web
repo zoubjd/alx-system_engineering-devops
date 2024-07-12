@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Bash script that will display information about subdomains
+
+# Function to get subdomain information using dig
+get_subdomain_info() {
+    local subdomain=$1
+    local domain=$2
+    local full_domain="${subdomain}.${domain}"
+    local ip_address=$(dig +short "$full_domain" | awk 'NR==1')
+    
+    if [ -n "$ip_address" ]; then
+        echo "The subdomain $subdomain is an A record and points to $ip_address"
+    else
+        echo "The subdomain $subdomain does not resolve to an IP address"
+    fi
+}
+
+# Check the number of arguments
+if [ $# -eq 1 ]; then
+    domain=$1
+    subdomains=( "www" "lb-01" "web-01" "web-02" )
+    for subdomain in "${subdomains[@]}"; do
+        get_subdomain_info $subdomain $domain
+    done
+elif [ $# -eq 2 ]; then
+    domain=$1
+    subdomain=$2
+    get_subdomain_info $subdomain $domain
+else
+    echo "Usage: $0 <domain> [subdomain]"
+fi
