@@ -1,18 +1,23 @@
-### Frontend Sections
-frontend www-http
-   bind *:80
-   # Adds http header to end of end of the HTTP request
-   reqadd X-Forwarded-Proto:\ https
-   # Sets the default backend to use which is defined below with name 'www-backend'
-   default_backend www-zoubjd-tech-backend
-# Add a frontend to handle incoming HTTPS connections
-frontend www-zoubjd-tech-frontend
-    # Bind 443 with the generated letsencrypt cert.
-    bind *:443 ssl crt /etc/haproxy/certs/domain.pem
-    # set x-forward to https
-    reqadd X-Forwarded-Proto:\ https
-    # Select a Challenge
-    acl letsencrypt-acl path_beg /.well-known/acme-challenge/
-    # Use the challenge backend if the challenge is set
-    use_backend letsencrypt-backend if letsencrypt-acl
-    default_backend www-zoubjd-tech-backend
+global
+        log /dev/log    local0
+	stats socket /run/haproxy/admin.sock mode 660 level admin
+
+defaults
+        log     global
+        mode    http
+        option  httplog
+	timeout connect  10s
+	timeout client  30s
+	timeout server  30s
+
+frontend zoubjd-tech-frontend
+	bind *:80
+	bind *:443 ssl crt /etc/haproxy/certs/zoubjd.tech.pem
+	http-request redirect scheme https unless { ssl_fc }
+	http-request set-header X-Forwarded-Proto https
+	default_backend zoubjd-tech-backend
+
+backend zoubjd-tech-backend
+	balance roundrobin
+	server 453-web-01 35.243.128.200:80 check
+	server 453-web-02 3.239.120.96:80 check
