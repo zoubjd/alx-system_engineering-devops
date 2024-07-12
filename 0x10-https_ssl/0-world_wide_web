@@ -6,7 +6,8 @@ get_subdomain_info() {
     local subdomain=$1
     local domain=$2
     local full_domain="${subdomain}.${domain}"
-    local ip_address=$(dig +short "$full_domain" | awk 'NR==1')
+    local ip_address
+    ip_address=$(dig +short "$full_domain" | awk 'NR==1')
     
     if [ -n "$ip_address" ]; then
         echo "The subdomain $subdomain is an A record and points to $ip_address"
