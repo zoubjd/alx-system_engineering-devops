@@ -1,33 +1,23 @@
 #!/usr/bin/python3
-'''A script that gathers employee name completed
-tasks and total number of tasks from an API
-'''
-
-import re
-import requests
+"""imports and displays from an api"""
+import requests as req
 import sys
 
-REST_API = "https://jsonplaceholder.typicode.com"
 
-if __name__ == '__main__':
-    if len(sys.argv) == 2:
-        if re.fullmatch(r'\d+', sys.argv[1]):
-            id = int(sys.argv[1])
-            emp_req = requests.get('{}/users/{}'.format(REST_API, id)).json()
-            task_req = requests.get('{}/todos'.format(REST_API)).json()
-            emp_name = emp_req.get('name')
-            tasks = list(filter(lambda x: x.get('userId') == id, task_req))
-            completed_tasks = list(filter(lambda x: x.get('completed'), tasks))
-            print(
-                'Employee {} is done with tasks({}/{}):'.format(
-                    emp_name,
-                    len(completed_tasks),
-                    len(tasks)
-                )
-            )
-            if len(completed_tasks) > 0:
-                for task in completed_tasks:
-                    print('\t {}'.format(task.get('title')))
+if __name__ == "__main__":
+    id_employee = int(sys.argv[1])
+    url = "https://jsonplaceholder.typicode.com"
+    url_user = req.get(f"{url}/users/{id_employee}").json()
+    url_user_todos = req.get(f"{url}/users/{id_employee}/todos").json()
 
-    else:
-        print('Usage: python3 0-gather_data_from_an_API.py <employee_id>')
+    name_employee = url_user.get("name")
+    total = len(url_user_todos)
+    count = 0
+    for todos in url_user_todos:
+        if todos.get('completed'):
+            count += 1
+
+    print(f"Employee {name_employee} is done with tasks({count}/{total}):")
+    for todos in url_user_todos:
+        if todos.get('completed'):
+            print(f"\t {todos['title']}")
