@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """imports and displays from an api"""
-import requests as req
 import sys
-
+import requests as req
 
 if __name__ == "__main__":
     id_employee = int(sys.argv[1])
