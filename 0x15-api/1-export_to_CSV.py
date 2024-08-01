@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""models doc"""
+"""prints into csv from api"""
 import requests as req
 import sys
 
