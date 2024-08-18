@@ -9,8 +9,9 @@ def number_of_subscribers(subreddit):
     from Reddit API
     """
     url = 'https://www.reddit.com/r/{}.json'.format(subreddit)
-
-    r = requests.get(url, allow_redirects=False)
+    headers = {'User-Agent': 'My User Agent 1.0'}
+    r = requests.get(url, headers=headers,
+                            allow_redirects=False)
 
     if r.status_code != 200:
         return 0
