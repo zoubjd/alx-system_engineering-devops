@@ -3,6 +3,7 @@
 
 import requests
 
+
 def number_of_subscribers(subreddit):
     """Request number of subscribers of subreddit
     from Reddit API
